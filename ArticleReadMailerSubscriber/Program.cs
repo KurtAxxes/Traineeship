@@ -1,12 +1,12 @@
-﻿using AxxesTimes.Data;
+﻿using ArticleReadMailerSubscriber.Handlers;
+using AxxesTimes.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NServiceBus;
-using ReadArticleMailer.Handlers;
 using System;
 using System.Threading.Tasks;
 
-namespace ReadArticleMailer
+namespace ArticleReadMailerSubscriber
 {
     class Program
     {
@@ -37,7 +37,7 @@ namespace ReadArticleMailer
         private static async Task StartListeningAsync()
         {
             // configure nservicebus
-            var endpointConfiguration = new EndpointConfiguration("ReadArticleMailer");
+            var endpointConfiguration = new EndpointConfiguration("ArticleReadMailerSubscriber");
             endpointConfiguration.RegisterComponents(
                 registration: components =>
                 {

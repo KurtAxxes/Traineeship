@@ -5,6 +5,8 @@ using AxxesTimes.Models;
 using AxxesTimes.Data;
 using System.Threading.Tasks;
 using System.Linq;
+using NServiceBus;
+using AxxesTimes.Events;
 
 namespace AxxesTimes.Controllers
 {
@@ -14,7 +16,7 @@ namespace AxxesTimes.Controllers
 
         private readonly ILogger<HomeController> _logger;
         private readonly IArticlesRepository _articlesRepository;
-
+        
         public HomeController(ILogger<HomeController> logger, IArticlesRepository articlesRepository)
         {
             _logger = logger;
@@ -38,7 +40,7 @@ namespace AxxesTimes.Controllers
             return View(vm);
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
             var article = _articlesRepository.GetArticleById(id);
 
@@ -51,7 +53,7 @@ namespace AxxesTimes.Controllers
             article.Reads++;
 
             // update current reads for article in the database
-            UpdateArticleRead(article.Id);
+            await NotifyArticleReadAsync(article.Id);
 
             return View(article);
         }
@@ -67,27 +69,20 @@ namespace AxxesTimes.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        /*
-         * THIS APPROACH IS A BAD IDEA BECAUSE IT'S A DIRECT DEPENDENCY ON THE DATABASE
-         * AND CAN POTENTIALLY HAVE A HUGE PERFORMANCE IMPACT.
-         * IT IS BETTER TO USE MESSAGE QUEUES INSTEAD.
-         */
-        private void UpdateArticleRead(int articleId)
-        {
-            throw InvalidOperationException("You shouldn't be using this method anymore.");
-            _articlesRepository.UpdateArticleRead(articleId);
-        }
-
         private async Task NotifyArticleReadAsync(int articleId)
         {
-            // Send a ReadArticle command message with NServiceBus here
-            // - Setup nservicebus configuration
-            // - Use LearningTransport
-            // - Route messages to ReadArticleSubscriber
-            // - Create endpoint instance
-            // - Create command message object
-            // - Send command message object over NServiceBus
-            // - Stop endpoint instance
+            var endpointConfiguration = new EndpointConfiguration("AxxesTimesSite"); // the initiator of the command
+            var transport = endpointConfiguration.UseTransport<LearningTransport>();
+            var routing = transport.Routing();
+            routing.RouteToEndpoint(typeof(ReadArticle), "ReadArticleSubscriber"); // the command type and receiver of the command
+
+            var endpointInstance = await Endpoint.Start(endpointConfiguration)
+                                                 .ConfigureAwait(false);
+
+            // setup event message here
+
+            await endpointInstance.Publish(articleReadEvent)
+                                  .ConfigureAwait(false);
         }
     }
 }

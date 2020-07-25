@@ -1,7 +1,8 @@
-﻿using ReadArticleSubscriber.Handlers;
+﻿using ArticleReadSubscriber.Handlers;
 using AxxesTimes.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NServiceBus;
 using System;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace ArticleReadSubscriber
 
         static async Task Main()
         {
-            Console.Title = "ReadArticleSubscriber";
+            Console.Title = "ArticleReadSubscriber";
 
             IConfiguration Configuration = new ConfigurationBuilder()
                                                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -36,14 +37,14 @@ namespace ArticleReadSubscriber
         private static async Task StartListeningAsync()
         {
             // configure nservicebus
-            var endpointConfiguration = new EndpointConfiguration("ReadArticleSubscriber");
+            var endpointConfiguration = new EndpointConfiguration("ArticleReadSubscriber");
             endpointConfiguration.RegisterComponents(
                 registration: components =>
                 {
                     components.ConfigureComponent(
                         componentFactory: builder =>
                         {
-                            return new ReadArticleHandler(serviceProvider.GetService<IArticlesRepository>());
+                            return new ArticleReadHandler(serviceProvider.GetService<IArticlesRepository>());
                         },
                         dependencyLifecycle: DependencyLifecycle.InstancePerUnitOfWork);
                 });
