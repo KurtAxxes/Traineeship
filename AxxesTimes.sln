@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AxxesTimes", "AxxesTimes\AxxesTimes.csproj", "{2561AB44-8C6B-4C62-B755-0EC7597BAB0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxxesTimes.Data", "AxxesTimes.Data\AxxesTimes.Data.csproj", "{5DFF5C77-7C30-4C50-BDDB-083DE9C4F635}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F056192-3E33-45FB-935C-5F1B0981F6B5}"
+	ProjectSection(SolutionItems) = preProject
+		SQLscripts\prepare_database.sql = SQLscripts\prepare_database.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2561AB44-8C6B-4C62-B755-0EC7597BAB0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2561AB44-8C6B-4C62-B755-0EC7597BAB0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2561AB44-8C6B-4C62-B755-0EC7597BAB0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2561AB44-8C6B-4C62-B755-0EC7597BAB0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DFF5C77-7C30-4C50-BDDB-083DE9C4F635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DFF5C77-7C30-4C50-BDDB-083DE9C4F635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DFF5C77-7C30-4C50-BDDB-083DE9C4F635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DFF5C77-7C30-4C50-BDDB-083DE9C4F635}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F4C9319-821C-418A-9B44-A6D47E883F45}
+	EndGlobalSection
+EndGlobal

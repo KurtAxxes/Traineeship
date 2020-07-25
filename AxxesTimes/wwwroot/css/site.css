@@ -1,0 +1,173 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.hidden {
+    display: none !important;
+}
+
+.navbar, .footer {
+    background: #515151;
+}
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+a.navbar-brand img {
+    height: 25px;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+a.nav-link {
+    color: #fff;
+    font-weight: bold;
+}
+a:hover {
+    color: #fa3;
+    text-decoration: none !important;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    color: #9C9C9C !important;
+    font-size: 0.8em;
+}
+.footer a {
+    color: #fff !important;
+    border-bottom: 0 !important;
+}
+.footer a:hover {
+    color: #fa3 !important;
+    text-decoration: none !important;
+}
+
+.articles {
+    max-width: 560px;
+    margin: auto;
+}
+.article {
+    text-align: left;
+    border-bottom: 5px solid #fa3;
+    padding: 5px;
+}
+.article:hover {
+    cursor: pointer;
+    background: #f9ebd9;
+}
+.article:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.article-image {
+    width: 250px;
+    margin-right: 25px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    float: left;
+}
+.article-image img {
+    max-width: 250px;
+    max-height: 250px;
+}
+.article-info {
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.article-date {
+    font-size: 0.8em;
+    display: block;
+}
+.article-title{
+    display: block;
+    font-weight: bold;
+}
+article-intro {
+    display: block;
+}
+.article-views {
+    text-align: right;
+    font-style: italic;
+    display: block;
+    font-size: 0.8em;
+}
+
+.paging {
+    margin: 25px 0;
+}
+.paging a {
+    display: inline-block;
+    padding: .5em 1em;
+    border: 1px solid rgba(24,25,26,.2);
+    color: #fa3;
+}
+
+.article-header {
+    background: #fa3;
+    color: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.article-content {
+    margin-bottom: 100px;
+}
+.article-reads {
+    font-style: italic;
+    text-align: right;
+}

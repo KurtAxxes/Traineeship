@@ -1,0 +1,30 @@
+﻿@model HomeViewModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Latest news from Axxes</h1>
+
+    <div class="articles">
+        @foreach (var item in Model.Articles) {
+            <div class="article" onclick="window.open('/Home/Detail/@(@item.Id)', '_self');">
+                <div class="article-image">
+                    <img src="@Html.Raw(item.Image)" alt="@Html.Raw(item.Title)" title="@Html.Raw(item.Title)" />
+                </div>
+                <div class="article-info">
+                    <span class="article-date">@Html.DisplayFor(modelItem => item.Date)</span>
+                    <span class="article-title">@Html.DisplayFor(modelItem => item.Title)</span>
+                    <span class="article-intro">@Html.DisplayFor(modelItem => item.Intro)</span>
+                    <span class="article-views">@Html.DisplayFor(modelItem => item.Reads) views</span>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="paging">
+        <a class="previous @(@Model.HasPreviousPage ? "" : "hidden")" href="?p=@(@Model.CurrentPage - 1)"><<</a>
+        <a class="next @(@Model.HasNextPage ? "" : "hidden")" href="?p=@(@Model.CurrentPage + 1)">>></a>
+    </div>
+</div>
