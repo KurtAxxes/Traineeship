@@ -48,12 +48,26 @@ namespace ArticleReadSubscriber
                         },
                         dependencyLifecycle: DependencyLifecycle.InstancePerUnitOfWork);
                 });
+            // TODO: configure error queue, send failed messages to "ArticleReadSubscriber.Errors"
+            endpointConfiguration.EnableInstallers();
 
-            // configure recoverability options here
-            // - 1 immediate retry
-            // - 2 delayed retries with 2 seconds time increase in between
+            // TODO: Setup nservicebus with rabbitmq here
+            // - Set transport
+            // - Set connection string
+            // - Use direct routing
 
-            var transport = endpointConfiguration.UseTransport<LearningTransport>();
+            var recoverability = endpointConfiguration.Recoverability();
+            recoverability.Delayed(
+                delayed =>
+                {
+                    delayed.NumberOfRetries(2);
+                    delayed.TimeIncrease(TimeSpan.FromSeconds(2));
+                });
+            recoverability.Immediate(
+                immediate =>
+                {
+                    immediate.NumberOfRetries(1);
+                });
 
             // start listening for incoming messages
             var endpointInstance = await Endpoint.Start(endpointConfiguration)

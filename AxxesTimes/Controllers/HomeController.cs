@@ -71,9 +71,14 @@ namespace AxxesTimes.Controllers
 
         private async Task NotifyArticleReadAsync(int articleId)
         {
-            var endpointConfiguration = new EndpointConfiguration("AxxesTimesSite"); // the initiator of the command
-            endpointConfiguration.UseTransport<LearningTransport>();
-            
+            var endpointConfiguration = new EndpointConfiguration("AxxesTimesSite");
+            endpointConfiguration.EnableInstallers();
+
+            // TODO: Setup nservicebus with rabbitmq here
+            // - Set transport
+            // - Set connection string
+            // - Use direct routing
+
             var endpointInstance = await Endpoint.Start(endpointConfiguration)
                                                  .ConfigureAwait(false);
 

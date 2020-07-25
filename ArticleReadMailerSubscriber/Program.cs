@@ -48,7 +48,13 @@ namespace ArticleReadMailerSubscriber
                         },
                         dependencyLifecycle: DependencyLifecycle.InstancePerUnitOfWork);
                 });
-            var transport = endpointConfiguration.UseTransport<LearningTransport>();
+            // TODO: configure error queue, send failed messages to "ArticleReadMailerSubscriber.Errors"
+            endpointConfiguration.EnableInstallers();
+
+            // TODO: Setup nservicebus with rabbitmq here
+            // - Set transport
+            // - Set connection string
+            // - Use direct routing
 
             // start listening for incoming messages
             var endpointInstance = await Endpoint.Start(endpointConfiguration)
