@@ -38,7 +38,7 @@ namespace AxxesTimes.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> Detail(int id)
+        public IActionResult Detail(int id)
         {
             var article = _articlesRepository.GetArticleById(id);
 
@@ -52,7 +52,7 @@ namespace AxxesTimes.Controllers
 
             // update current reads for article in the database
             UpdateArticleRead(article.Id);
-            
+
             return View(article);
         }
 
@@ -67,7 +67,6 @@ namespace AxxesTimes.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
         /*
          * THIS APPROACH IS A BAD IDEA BECAUSE IT'S A DIRECT DEPENDENCY ON THE DATABASE
          * AND CAN POTENTIALLY HAVE A HUGE PERFORMANCE IMPACT.
@@ -75,7 +74,20 @@ namespace AxxesTimes.Controllers
          */
         private void UpdateArticleRead(int articleId)
         {
+            throw InvalidOperationException("You shouldn't be using this method anymore.");
             _articlesRepository.UpdateArticleRead(articleId);
+        }
+
+        private async Task NotifyArticleReadAsync(int articleId)
+        {
+            // Send a ReadArticle command message with NServiceBus here
+            // - Setup nservicebus configuration
+            // - Use LearningTransport
+            // - Route messages to ReadArticleSubscriber
+            // - Create endpoint instance
+            // - Create command message object
+            // - Send command message object over NServiceBus
+            // - Stop endpoint instance
         }
     }
 }
