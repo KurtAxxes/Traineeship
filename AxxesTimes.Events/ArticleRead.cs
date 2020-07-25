@@ -1,7 +1,8 @@
-﻿namespace AxxesTimes.Events
+﻿using NServiceBus;
+
+namespace AxxesTimes.Events
 {
-    // Implement message as NServiceBus event
-    public class ArticleRead
+    public class ArticleRead : IEvent
     {
         public int ArticleId { get; set; }
     }

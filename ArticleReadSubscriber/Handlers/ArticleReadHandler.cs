@@ -2,6 +2,7 @@
 using AxxesTimes.Events;
 using NServiceBus;
 using NServiceBus.Logging;
+using System;
 using System.Threading.Tasks;
 
 namespace ArticleReadSubscriber.Handlers
@@ -9,6 +10,7 @@ namespace ArticleReadSubscriber.Handlers
     class ArticleReadHandler : IHandleMessages<ArticleRead>
     {
         static readonly ILog log = LogManager.GetLogger<ArticleReadHandler>();
+        static Random random = new Random();
 
         private readonly IArticlesRepository _articleRepository;
 
@@ -21,6 +23,12 @@ namespace ArticleReadSubscriber.Handlers
         {
             var articleId = message.ArticleId;
 
+            log.Info($"Received message for article {articleId}.");
+            
+            // generate system error, always happening
+            // OR
+            // generate transient error, happening from time to time
+            
             _articleRepository.UpdateArticleRead(articleId);
 
             log.Info($"Processed article read for article id {articleId}");

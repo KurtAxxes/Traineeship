@@ -48,6 +48,11 @@ namespace ArticleReadSubscriber
                         },
                         dependencyLifecycle: DependencyLifecycle.InstancePerUnitOfWork);
                 });
+
+            // configure recoverability options here
+            // - 1 immediate retry
+            // - 2 delayed retries with 2 seconds time increase in between
+
             var transport = endpointConfiguration.UseTransport<LearningTransport>();
 
             // start listening for incoming messages
